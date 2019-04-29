@@ -1,0 +1,10 @@
+.dockerignore
+/.idea/
+/vendor/
+/.eval/
+/tests/tmp
+
+/tests/report.html
+.env
+/.phpunit.result.cache
+/docs/images/diagrams/
