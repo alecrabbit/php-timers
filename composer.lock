@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9b2539b6aea30963001a3abf1bae334b",
+    "content-hash": "4969f2b0a0b01cd388261d68a112b2ae",
     "packages": [
         {
             "name": "alecrabbit/php-accessories",
