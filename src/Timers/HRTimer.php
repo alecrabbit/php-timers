@@ -2,6 +2,7 @@
 
 namespace AlecRabbit\Timers;
 
+use AlecRabbit\Timers\Core\AbstractTimer;
 use const AlecRabbit\Helpers\Constants\INT_SIZE_64BIT;
 
 /**

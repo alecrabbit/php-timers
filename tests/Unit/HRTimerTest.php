@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace AlecRabbit\Tests\Tools;
+namespace AlecRabbit\Tests\Timers;
 
 use AlecRabbit\Timers\HRTimer;
 use PHPUnit\Framework\TestCase;

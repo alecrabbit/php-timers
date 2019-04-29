@@ -1,11 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace AlecRabbit\Tests\Tools;
+namespace AlecRabbit\Tests\Timers;
 
-use AlecRabbit\Tools\Contracts\Strings;
-use AlecRabbit\Tools\Profiler;
-use AlecRabbit\Tools\Reports\TimerReport;
-use AlecRabbit\Tools\Timer;
+use AlecRabbit\Reports\Contracts\ReportableInterface;
+use AlecRabbit\Reports\Contracts\ReportInterface;
+use AlecRabbit\Reports\Core\AbstractReport;
+use AlecRabbit\Reports\Core\Reportable;
+use AlecRabbit\Reports\TimerReport;
+use AlecRabbit\Timers\Timer;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -20,10 +22,34 @@ class TimerReportTest extends TestCase
      */
     public function wrongReportable(): void
     {
-        $profiler = new Profiler();
         $timerReport = new TimerReport();
-        $this->expectException(\RuntimeException::class);
-        $timerReport->buildOn($profiler);
+        $this->expectException(\InvalidArgumentException::class);
+        $timerReport->buildOn(
+            new class extends Reportable {
+
+                protected function createEmptyReport(): ReportInterface
+                {
+                    return new class extends AbstractReport {
+                        /**
+                         * @return string
+                         */
+                        public function __toString(): string
+                        {
+                            return '';
+                        }
+
+                        /**
+                         * @param ReportableInterface $reportable
+                         * @return ReportInterface
+                         */
+                        public function buildOn(ReportableInterface $reportable): ReportInterface
+                        {
+                            return $this;
+                        }
+                    };
+                }
+            }
+        );
     }
 
     /**

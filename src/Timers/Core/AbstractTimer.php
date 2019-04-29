@@ -179,7 +179,7 @@ abstract class AbstractTimer extends Reportable implements TimerInterface
     protected function formattedElapsed(): string
     {
         return
-            Factory::getTimerReportFormatter()::formatElapsed($this->elapsed);
+            TimerReport::getFormatter()::formatElapsed($this->elapsed);
     }
 
     /**

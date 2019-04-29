@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace AlecRabbit\Tests\Tools;
+namespace AlecRabbit\Tests\Timers;
 
-use AlecRabbit\Timers\Reports\TimerReport;
+use AlecRabbit\Reports\TimerReport;
 use AlecRabbit\Timers\Timer;
 use PHPUnit\Framework\TestCase;
 use const AlecRabbit\Traits\Constants\DEFAULT_NAME;

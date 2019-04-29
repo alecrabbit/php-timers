@@ -3,13 +3,13 @@
 namespace AlecRabbit\Reports;
 
 use AlecRabbit\Formatters\Contracts\FormatterInterface;
+use AlecRabbit\Formatters\TimerReportFormatter;
 use AlecRabbit\Reports\Contracts\ReportableInterface;
 use AlecRabbit\Reports\Contracts\ReportInterface;
+use AlecRabbit\Reports\Contracts\TimerReportInterface;
 use AlecRabbit\Reports\Core\AbstractReport;
 use AlecRabbit\Timers\Core\AbstractTimer;
 use AlecRabbit\Timers\Core\Traits\TimerFields;
-use AlecRabbit\Timers\Factory;
-use AlecRabbit\Reports\Contracts\TimerReportInterface;
 
 class TimerReport extends AbstractReport implements TimerReportInterface
 {
@@ -27,9 +27,9 @@ class TimerReport extends AbstractReport implements TimerReportInterface
         $this->elapsed = (new \DateTimeImmutable())->diff($this->creationTime);
     }
 
-    protected static function getFormatter(): FormatterInterface
+    public static function getFormatter(): FormatterInterface
     {
-        return Factory::getTimerReportFormatter();
+        return new TimerReportFormatter();
     }
 
     /**
@@ -53,17 +53,28 @@ class TimerReport extends AbstractReport implements TimerReportInterface
             $this->avgValue = $reportable->getAverageValue();
             $this->currentValue = $reportable->getLastValue();
             $this->elapsed = $reportable->getElapsed();
-        } else {
-            $this->wrongReportable(AbstractTimer::class, $reportable);
+            return $this;
         }
-        return $this;
+        throw new \InvalidArgumentException(
+            AbstractTimer::class . ' expected, ' . get_class($reportable) . ' given.'
+        );
     }
+
+//    public function buildOn(ReportableInterface $reportable): ReportInterface
+//    {
+//        if ($reportable instanceof MemoryUsage) {
+//            return $this;
+//        }
+//        throw new \InvalidArgumentException(
+//            MemoryUsage::class . ' expected, ' . get_class($reportable) . ' given.'
+//        );
+//    }
 
     /**
      * @return string
      */
     public function __toString(): string
     {
-        return '';
+        return static::getFormatter()->format($this) ;
     }
 }
