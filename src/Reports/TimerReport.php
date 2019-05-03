@@ -15,21 +15,12 @@ class TimerReport extends AbstractReport implements TimerReportInterface
 {
     use TimerFields;
 
-    /**
-     * TimerReport constructor.
-     * @throws \Exception
-     */
-    public function __construct()
-    {
-        // TODO fix this?
-        // This lines here are to keep vimeo/psalm quiet
-        $this->creationTime = new \DateTimeImmutable();
-        $this->elapsed = (new \DateTimeImmutable())->diff($this->creationTime);
-    }
+    /** @var TimerReportFormatterInterface */
+    protected static $reportFormatter;
 
-    public static function getFormatter(): TimerReportFormatterInterface
+    public static function setFormatter(TimerReportFormatterInterface $formatter): void
     {
-        return new TimerReportFormatter();
+        static::$reportFormatter = $formatter;
     }
 
     /**
@@ -60,21 +51,19 @@ class TimerReport extends AbstractReport implements TimerReportInterface
         );
     }
 
-//    public function buildOn(ReportableInterface $reportable): ReportInterface
-//    {
-//        if ($reportable instanceof MemoryUsage) {
-//            return $this;
-//        }
-//        throw new \InvalidArgumentException(
-//            MemoryUsage::class . ' expected, ' . get_class($reportable) . ' given.'
-//        );
-//    }
-
     /**
      * @return string
      */
     public function __toString(): string
     {
-        return static::getFormatter()->format($this) ;
+        return static::getFormatter()->format($this);
+    }
+
+    public static function getFormatter(): TimerReportFormatterInterface
+    {
+        if (!static::$reportFormatter instanceof TimerReportFormatterInterface) {
+            static::$reportFormatter = new TimerReportFormatter();
+        }
+        return static::$reportFormatter;
     }
 }

@@ -56,7 +56,10 @@ dump($timer->report()); // use var_dump
 //   #stopped: false
 // }
 echo PHP_EOL;
+echo 'Pause 2 sec...', PHP_EOL;
+sleep(2);
 
-echo (string)$timer->report();
-// Timer:[new] Average: 1s, Last: 1s, Min(~): 1s, Max(~): 1s, Count: 5
+echo (string)$timer->report(); // rebuilt reported
+// Note: elapsed time increased by 2 sec
+// Timer[new]: Average: 1.0s, Last: 1.0s, Min(2): 1.0s, Max(3): 1.0s, Marks: 5, Elapsed: 7.0s
 echo PHP_EOL;

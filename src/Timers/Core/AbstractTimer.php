@@ -4,23 +4,13 @@ namespace AlecRabbit\Timers\Core;
 
 use AlecRabbit\Reports\Contracts\ReportInterface;
 use AlecRabbit\Reports\Core\Reportable;
-use AlecRabbit\Timers\Core\Traits\TimerFields;
-use AlecRabbit\Timers\Contracts\TimerInterface;
 use AlecRabbit\Reports\TimerReport;
+use AlecRabbit\Timers\Contracts\TimerInterface;
+use AlecRabbit\Timers\Core\Traits\TimerFields;
 
 abstract class AbstractTimer extends Reportable implements TimerInterface
 {
     use TimerFields;
-
-    protected const TIME_FUNCTION = 'microtime';
-
-    /** @var callable */
-    protected $timeFunction;
-
-    protected function createEmptyReport(): ReportInterface
-    {
-        return  (new TimerReport())->buildOn($this);
-    }
 
     /**
      * Timer constructor.
@@ -34,7 +24,6 @@ abstract class AbstractTimer extends Reportable implements TimerInterface
         $this->name = $this->defaultName($name);
         $this->creationTime = new \DateTimeImmutable();
         $this->computeElapsed();
-        $this->setTimeFunction();
         if ($start) {
             $this->start();
         }
@@ -227,14 +216,8 @@ abstract class AbstractTimer extends Reportable implements TimerInterface
         $this->previous = $stop;
     }
 
-//    /** {@inheritdoc} */
-//    public function getTimeFunction(): callable
-//    {
-//        return $this->timeFunction;
-//    }
-//
-    protected function setTimeFunction(): void
+    protected function createEmptyReport(): ReportInterface
     {
-        $this->timeFunction = static::TIME_FUNCTION;
+        return (new TimerReport())->buildOn($this);
     }
 }

@@ -20,7 +20,6 @@ for ($i = 0; $i < $count; $i++) {
     echo '.';
     $timer->check();
 }
-
 echo PHP_EOL;
 dump($timer->report()); // var_dump
 // AlecRabbit\Reports\TimerReport {#4
@@ -59,7 +58,10 @@ dump($timer->report()); // var_dump
 //   #stopped: false
 // }
 echo PHP_EOL;
+echo 'Pause 2 sec...', PHP_EOL;
+sleep(2);
 
-echo (string)$timer->report();
-// Timer[new]: Average: 10.3ms, Last: 10.3ms, Min(2): 10.1ms, Max(3): 10.4ms, Marks: 5, Elapsed: 73.9ms
+echo (string)$timer->report(false); // do not rebuild report
+// Note: elapsed value is relevant to run time unlike in timer.php example
+// Timer[new]: Average: 10.3ms, Last: 10.3ms, Min(2): 10.1ms, Max(3): 10.4ms, Marks: 5, Elapsed: 56.7ms
 echo PHP_EOL;
