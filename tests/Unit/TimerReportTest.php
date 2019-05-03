@@ -2,6 +2,7 @@
 
 namespace AlecRabbit\Tests\Timers;
 
+use AlecRabbit\Formatters\TimerReportFormatter;
 use AlecRabbit\Reports\Contracts\ReportableInterface;
 use AlecRabbit\Reports\Contracts\ReportInterface;
 use AlecRabbit\Reports\Core\AbstractReport;
@@ -50,6 +51,24 @@ class TimerReportTest extends TestCase
                 }
             }
         );
+    }
+
+    /**
+     * @test
+     */
+    public function timerReportGetFormatter(): void
+    {
+        $this->assertInstanceOf(TimerReportFormatter::class, TimerReport::getFormatter());
+    }
+    /**
+     * @test
+     */
+    public function timerReportSetFormatter(): void
+    {
+        $formatter = new TimerReportFormatter();
+        TimerReport::setFormatter($formatter);
+        $this->assertInstanceOf(TimerReportFormatter::class, TimerReport::getFormatter());
+        $this->assertSame($formatter, TimerReport::getFormatter());
     }
 
     /**

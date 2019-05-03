@@ -4,9 +4,12 @@ namespace AlecRabbit\Tests\Timers;
 
 use AlecRabbit\Accessories\Pretty;
 use AlecRabbit\Formatters\TimerReportFormatter;
+use AlecRabbit\Reports\Contracts\ReportableInterface;
+use AlecRabbit\Reports\Contracts\ReportInterface;
+use AlecRabbit\Reports\Core\AbstractReport;
+use AlecRabbit\Reports\TimerReport;
 use AlecRabbit\Timers\Contracts\TimerStrings;
 use AlecRabbit\Timers\HRTimer;
-use AlecRabbit\Reports\TimerReport;
 use AlecRabbit\Timers\Timer;
 use PHPUnit\Framework\TestCase;
 
@@ -15,17 +18,36 @@ use PHPUnit\Framework\TestCase;
  */
 class TimerReportFormatterTest extends TestCase
 {
-//    /**
-//     * @test
-//     * @throws \Exception
-//     */
-//    public function wrongReport(): void
-//    {
-//        $formatter = new TimerReportFormatter();
-//        $profilerReport = new ProfilerReport();
-//        $this->expectException(\RuntimeException::class);
-//        $formatter->format($profilerReport);
-//    }
+    /**
+     * @test
+     * @throws \Exception
+     */
+    public function wrongReport(): void
+    {
+        $formatter = new TimerReportFormatter();
+
+        $wrongReport = new class extends AbstractReport
+        {
+            /**
+             * @return string
+             */
+            public function __toString(): string
+            {
+                return '';
+            }
+
+            /**
+             * @param ReportableInterface $reportable
+             * @return ReportInterface
+             */
+            public function buildOn(ReportableInterface $reportable): ReportInterface
+            {
+                return $this;
+            }
+        };
+        $this->expectException(\RuntimeException::class);
+        $formatter->format($wrongReport);
+    }
 
     /**
      * @test

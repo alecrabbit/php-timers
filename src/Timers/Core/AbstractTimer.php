@@ -8,6 +8,9 @@ use AlecRabbit\Reports\TimerReport;
 use AlecRabbit\Timers\Contracts\TimerInterface;
 use AlecRabbit\Timers\Core\Traits\TimerFields;
 
+/**
+ * Class AbstractTimer
+ */
 abstract class AbstractTimer extends Reportable implements TimerInterface
 {
     use TimerFields;
@@ -24,6 +27,7 @@ abstract class AbstractTimer extends Reportable implements TimerInterface
         $this->name = $this->defaultName($name);
         $this->creationTime = new \DateTimeImmutable();
         $this->computeElapsed();
+        $this->report = $this->createEmptyReport();
         if ($start) {
             $this->start();
         }

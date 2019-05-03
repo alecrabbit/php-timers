@@ -11,12 +11,26 @@ use AlecRabbit\Reports\Core\AbstractReport;
 use AlecRabbit\Timers\Core\AbstractTimer;
 use AlecRabbit\Timers\Core\Traits\TimerFields;
 
+/**
+ * Class TimerReport
+ * @psalm-suppress MissingConstructor
+ */
 class TimerReport extends AbstractReport implements TimerReportInterface
 {
     use TimerFields;
 
     /** @var TimerReportFormatterInterface */
     protected static $reportFormatter;
+
+//    /**
+//     * TimerReport constructor.
+//     * @throws \Exception
+//     */
+//    public function __construct()
+//    {
+//        $this->creationTime = new \DateTimeImmutable();
+//        $this->elapsed = (new \DateTimeImmutable())->diff($this->creationTime);
+//    }
 
     public static function setFormatter(TimerReportFormatterInterface $formatter): void
     {
