@@ -1,16 +1,20 @@
 <?php
 
+use AlecRabbit\Accessories\Pretty;
+use AlecRabbit\Timers\HRTimer;
 use AlecRabbit\Timers\Timer;
 
+const MICRO_SECONDS = 10000;
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-echo Timer::class . ' example', PHP_EOL;
-echo 'Start...', PHP_EOL, 'wait 5 sec', PHP_EOL;
-$timer = new Timer('new');
+echo HRTimer::class . ' example', PHP_EOL;
+
 $count = 5;
+echo 'Start...', PHP_EOL, 'wait ', Pretty::microseconds(MICRO_SECONDS * $count), PHP_EOL;
+$timer = new HRTimer('new');
 $timer->start();
 for ($i = 0; $i < $count; $i++) {
-    sleep(1);
+    usleep(MICRO_SECONDS);
     echo '.';
     $timer->check();
 }

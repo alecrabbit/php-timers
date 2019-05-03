@@ -33,27 +33,42 @@ fi
 
 header "Tests, coverage, analysis and metrics script"
 dark "${ver}"
+
 if [[ -e "${TITLE_FILE}" ]]
 then
     title=$(<${TITLE_FILE})
 else
     title="${dir}"
-    if [[ -x "$(command -v realpath)" ]]
-    then
-      title_file="$(realpath ${TITLE_FILE})"
-    else
-      title_file=${TITLE_FILE}
-    fi
-    error "No title file found."
+    title_file="$(get_realpath ${TITLE_FILE})"
+    red "No title file found."
     dark "Searched for: ${title_file}"
 fi
-dark "Setting terminal title... \n'${title}'"
-set_title "${title}"
+
+if [[ -e "${MAIN_ENV_FILE}" ]]
+then
+    dark "Main .env file found"
+    if [[ -e "${ENV_FILE}" ]]
+    then
+        env_file="$(get_realpath ${ENV_FILE})"
+        dark "Secondary .env file found"
+    else
+        yellow "Secondary .env file not found"
+        green "Creating symlink to main .env file"
+        ln -s ${MAIN_ENV_FILE} ${ENV_FILE}
+    fi
+else
+    main_env_file="$(get_realpath ${MAIN_ENV_FILE})"
+    yellow "Main .env file not found, using defaults"
+    dark "Searched for: ${main_env_file}"
+fi
+
+dark "Setting terminal title..."
+set_title "${title} - Testing..."
 
 
 if [[ ${EXEC} == 0 ]]
 then
-    error "No-Exec selected."
+    red "No-Exec selected."
 fi
 options_enabled
 
@@ -101,4 +116,6 @@ fi
 end_time=`date +%s`
 run_time=$((end_time-start_time))
 info "Executed in ${run_time}s\nBye!"
+set_title "${title}"
+
 exit 0

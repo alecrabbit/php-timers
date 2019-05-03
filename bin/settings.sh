@@ -82,6 +82,7 @@ set -- "${params[@]}"  # overwrites the original positional params
 #echo "$@" # for debug
 
 SOURCE_DIR="src"
+
 PHPSTAN_LEVEL=7
 PSALM_CONFIG="./../psalm.xml"
 PHPSTAN_CONFIG="./../phpstan.neon"
@@ -96,8 +97,18 @@ PHPUNIT_COVERAGE_HTML_REPORT="${TMP_DIR}/${COVERAGE_DIR}/html"
 PHPUNIT_COVERAGE_CLOVER_REPORT="${TMP_DIR}/${COVERAGE_DIR}/clover.xml"
 XDEBUG_FILTER_FILE="${TMP_DIR}/xdebug-filter.php"
 TEST_REPORT_INDEX="./../${TESTS_DIR}/report.html"
-TITLE_FILE="./../TERMINAL_TITLE"
+TERMINAL_TITLE_FILE="TERMINAL_TITLE"
+TITLE_FILE="./../${TERMINAL_TITLE_FILE}"
+ENV_FILE=".env"
+MAIN_ENV_FILE="../${ENV_FILE}"
 HEADER="$(basename $(dirname "$(pwd)"))"
+PKG_SETTINGS_DIR=".settings";
+COMPOSER_JSON_FILE="${PKG_SETTINGS_DIR}/composer.json.result";
+COMPOSER_JSON_TEMPLATE="template.composer.json";
+GIT_ATTR_FILE=".gitattributes.dist";
+DIST_ENV_FILE=".env.dist";
+DIST_DEFAULTS=".defaults.dist";
+GLOBAL_DIST_DEFAULTS="${HOME}/.php-package-template.defaults";
 
 if [[ ${COVERAGE} == 1 ]]
 then

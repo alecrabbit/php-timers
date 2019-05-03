@@ -11,7 +11,7 @@ use function AlecRabbit\typeOf;
 use Carbon\CarbonInterval;
 use const AlecRabbit\Traits\Constants\DEFAULT_NAME;
 
-class TimerReportFormatter extends ReportFormatter implements TimerStrings
+class TimerReportFormatter extends ReportFormatter implements TimerReportFormatterInterface, TimerStrings
 {
     protected const MILLISECONDS_THRESHOLD = 10000;
 
@@ -53,6 +53,7 @@ class TimerReportFormatter extends ReportFormatter implements TimerStrings
         return static::formatElapsed($elapsed);
     }
 
+    /** {@inheritdoc} */
     public static function formatElapsed(\DateInterval $elapsed): string
     {
         $c = CarbonInterval::instance($elapsed);

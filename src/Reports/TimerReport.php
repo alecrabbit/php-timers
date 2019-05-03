@@ -2,8 +2,8 @@
 
 namespace AlecRabbit\Reports;
 
-use AlecRabbit\Formatters\Contracts\FormatterInterface;
 use AlecRabbit\Formatters\TimerReportFormatter;
+use AlecRabbit\Formatters\TimerReportFormatterInterface;
 use AlecRabbit\Reports\Contracts\ReportableInterface;
 use AlecRabbit\Reports\Contracts\ReportInterface;
 use AlecRabbit\Reports\Contracts\TimerReportInterface;
@@ -27,7 +27,7 @@ class TimerReport extends AbstractReport implements TimerReportInterface
         $this->elapsed = (new \DateTimeImmutable())->diff($this->creationTime);
     }
 
-    public static function getFormatter(): FormatterInterface
+    public static function getFormatter(): TimerReportFormatterInterface
     {
         return new TimerReportFormatter();
     }
