@@ -3,7 +3,7 @@
 use AlecRabbit\Accessories\Pretty;
 use AlecRabbit\Timers\Timer;
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 const MICRO_SECONDS = 1000000;
 $count = 5;
@@ -12,6 +12,7 @@ echo Timer::class . ' example', PHP_EOL;
 echo 'Start...', PHP_EOL, 'wait ', Pretty::microseconds(MICRO_SECONDS * $count), PHP_EOL;
 
 $timer = new Timer('new');
+$elapsed = new Timer('elapsed');
 $timer->start();
 for ($i = 0; $i < $count; $i++) {
     usleep(MICRO_SECONDS);
@@ -48,8 +49,8 @@ dump($timer->report()); // use var_dump
 //   #avgValue: 1.000547361373901
 //   #minValue: 1.000500917434692
 //   #maxValue: 1.000637054443359
-//   #minValueIteration: 3
-//   #maxValueIteration: 2
+//   #minValueIteration: 2
+//   #maxValueIteration: 3
 //   #count: 5
 //   #name: "new"
 //   #started: true
@@ -59,7 +60,12 @@ echo PHP_EOL;
 echo 'Pause 2 sec...', PHP_EOL;
 sleep(2);
 
-echo (string)$timer->report(); // rebuilt reported
+echo (string)$timer->report(false); // don't rebuild report
+// Timer[new]: Average: 1.0s, Last: 1.0s, Min(2): 1.0s, Max(3): 1.0s, Marks: 5, Elapsed: 5.0s
+echo (string)$timer->report(); // rebuild report
 // Note: elapsed time increased by 2 sec
-// Timer[new]: Average: 1.0s, Last: 1.0s, Min(2): 1.0s, Max(3): 1.0s, Marks: 5, Elapsed: 7.0s
+// Timer[new]: Average: 1.0s, Last: 1.0s, Min(2): 1.0s, Max(3): 1.0s, Marks: 5, Elapsed: 7.1s
+echo PHP_EOL;
+echo (string)$elapsed->report();
+// Timer[elapsed]: Elapsed: 7.1s
 echo PHP_EOL;

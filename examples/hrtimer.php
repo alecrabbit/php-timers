@@ -3,8 +3,7 @@
 use AlecRabbit\Accessories\Pretty;
 use AlecRabbit\Timers\HRTimer;
 
-require_once __DIR__ . '/../../vendor/autoload.php';
-
+require_once __DIR__ . '/../vendor/autoload.php';
 
 $count = 5;
 const MICRO_SECONDS = 10000;
@@ -13,6 +12,7 @@ echo HRTimer::class . ' example', PHP_EOL;
 echo 'Start...', PHP_EOL, 'wait ', Pretty::microseconds(MICRO_SECONDS * $count), PHP_EOL;
 
 $timer = new HRTimer('new');
+$elapsed = new HRTimer('elapsed');
 $timer->start();
 
 for ($i = 0; $i < $count; $i++) {
@@ -61,7 +61,12 @@ echo PHP_EOL;
 echo 'Pause 2 sec...', PHP_EOL;
 sleep(2);
 
-echo (string)$timer->report(false); // do not rebuild report
-// Note: elapsed value is relevant to run time unlike in timer.php example
+echo (string)$timer->report(false); // don't rebuild report
 // Timer[new]: Average: 10.3ms, Last: 10.3ms, Min(2): 10.1ms, Max(3): 10.4ms, Marks: 5, Elapsed: 56.7ms
+echo (string)$timer->report(); // rebuild report
+// Note: elapsed time increased by 2 sec
+// Timer[new]: Average: 10.3ms, Last: 10.3ms, Min(2): 10.1ms, Max(3): 10.4ms, Marks: 5, Elapsed: 2.1s
+echo PHP_EOL;
+echo (string)$elapsed->report();
+// Timer[elapsed]: Elapsed: 2.1s
 echo PHP_EOL;
