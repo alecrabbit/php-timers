@@ -55,7 +55,6 @@ class HRTimerTest extends TestCase
         $timer->bounds(1, null);
     }
 
-
     /**
      * @test
      * @throws \Exception

@@ -1,15 +1,15 @@
 language: php
 
 php:
-- 7.2
-- 7.3
-- 7.4snapshot
-#- nightly
+  - 7.2
+  - 7.3
+  - 7.4snapshot
+#  - nightly
 
 matrix:
   allow_failures:
-  - php: 7.4snapshot
-#  - php: nightly
+    - php: 7.4snapshot
+#    - php: nightly
 
 addons:
   apt:
@@ -20,7 +20,7 @@ cache:
   bundler: true
 
 install:
-  - travis_retry ./bin/travis/travis-init.sh
+  - travis_retry ./.travis/travis-init.sh
   - travis_retry composer install --no-interaction --prefer-source
 
 script:

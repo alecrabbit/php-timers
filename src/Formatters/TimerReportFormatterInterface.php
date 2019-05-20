@@ -2,9 +2,10 @@
 
 namespace AlecRabbit\Formatters;
 
+use AlecRabbit\Formatters\Contracts\FormatterInterface;
 use AlecRabbit\Formatters\Core\Formattable;
 
-interface TimerReportFormatterInterface
+interface TimerReportFormatterInterface extends FormatterInterface
 {
     /**
      * @param Formattable $formattable
