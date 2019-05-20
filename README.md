@@ -1,4 +1,4 @@
-# PHP Timers
+# ⏲️ PHP Timers
 
 [![PHP Version](https://img.shields.io/packagist/php-v/alecrabbit/php-timers.svg)](https://php.net/)
 [![Build Status](https://travis-ci.com/alecrabbit/php-timers.svg?branch=master)](https://travis-ci.com/alecrabbit/php-timers)
