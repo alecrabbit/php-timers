@@ -261,16 +261,16 @@
         },
         {
             "name": "alecrabbit/php-traits",
-            "version": "0.3.2",
+            "version": "0.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alecrabbit/php-traits.git",
-                "reference": "e30e42adbb62e2062a20a910c1436a5eddc27490"
+                "reference": "acccd01f348ee77a452aa5a5cb608a44ac1f8044"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alecrabbit/php-traits/zipball/e30e42adbb62e2062a20a910c1436a5eddc27490",
-                "reference": "e30e42adbb62e2062a20a910c1436a5eddc27490",
+                "url": "https://api.github.com/repos/alecrabbit/php-traits/zipball/acccd01f348ee77a452aa5a5cb608a44ac1f8044",
+                "reference": "acccd01f348ee77a452aa5a5cb608a44ac1f8044",
                 "shasum": ""
             },
             "require": {
@@ -305,7 +305,7 @@
                 "trait",
                 "traits"
             ],
-            "time": "2019-04-28T07:34:05+00:00"
+            "time": "2019-06-09T16:23:47+00:00"
         },
         {
             "name": "krowinski/bcmath-extended",
