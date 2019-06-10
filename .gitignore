@@ -8,3 +8,4 @@
 .env
 /.phpunit.result.cache
 /docs/images/diagrams/
+/composer.lock
