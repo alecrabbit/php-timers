@@ -2,10 +2,8 @@
 
 namespace AlecRabbit\Timers\Core;
 
-use AlecRabbit\Formatters\TimerReportFormatterInterface;
-use AlecRabbit\Reports\Contracts\ReportInterface;
+use AlecRabbit\Formatters\Contracts\TimerReportFormatterInterface;
 use AlecRabbit\Reports\Core\AbstractReportable;
-use AlecRabbit\Reports\TimerReport;
 use AlecRabbit\Timers\Contracts\TimerInterface;
 use AlecRabbit\Timers\Core\Traits\TimerFields;
 

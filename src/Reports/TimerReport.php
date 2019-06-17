@@ -2,10 +2,6 @@
 
 namespace AlecRabbit\Reports;
 
-use AlecRabbit\Formatters\TimerReportFormatter;
-use AlecRabbit\Formatters\TimerReportFormatterInterface;
-use AlecRabbit\Reports\Contracts\ReportableInterface;
-use AlecRabbit\Reports\Contracts\ReportInterface;
 use AlecRabbit\Reports\Contracts\TimerReportInterface;
 use AlecRabbit\Reports\Core\AbstractReport;
 use AlecRabbit\Reports\Core\AbstractReportable;

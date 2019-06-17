@@ -1,8 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace AlecRabbit\Formatters;
-
-use AlecRabbit\Formatters\Contracts\FormatterInterface;
+namespace AlecRabbit\Formatters\Contracts;
 
 interface TimerReportFormatterInterface extends FormatterInterface
 {

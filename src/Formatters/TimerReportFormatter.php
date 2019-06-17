@@ -3,6 +3,7 @@
 namespace AlecRabbit\Formatters;
 
 use AlecRabbit\Accessories\Pretty;
+use AlecRabbit\Formatters\Contracts\TimerReportFormatterInterface;
 use AlecRabbit\Formatters\Core\AbstractFormatter;
 use AlecRabbit\Reports\Core\Formattable;
 use AlecRabbit\Reports\TimerReport;
