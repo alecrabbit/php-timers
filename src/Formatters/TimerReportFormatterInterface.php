@@ -10,5 +10,5 @@ interface TimerReportFormatterInterface extends FormatterInterface
      * @param \DateInterval $elapsed
      * @return string
      */
-    public static function formatElapsed(\DateInterval $elapsed): string;
+    public function formatElapsed(\DateInterval $elapsed): string;
 }

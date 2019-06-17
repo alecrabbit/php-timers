@@ -2,6 +2,7 @@
 
 namespace AlecRabbit\Timers\Core;
 
+use AlecRabbit\Formatters\TimerReportFormatterInterface;
 use AlecRabbit\Reports\Contracts\ReportInterface;
 use AlecRabbit\Reports\Core\AbstractReportable;
 use AlecRabbit\Reports\TimerReport;
@@ -171,8 +172,14 @@ abstract class AbstractTimer extends AbstractReportable implements TimerInterfac
      */
     protected function formattedElapsed(): string
     {
+        $formatter = $this->report()->getFormatter();
+        if ($formatter instanceof TimerReportFormatterInterface) {
+            return $formatter->formatElapsed($this->elapsed);
+        }
+        // @codeCoverageIgnoreStart
         return
-            $this->report()->getFormatter()->formatElapsed($this->elapsed);
+            $this->elapsed->format('%ss');
+        // @codeCoverageIgnoreEnd
     }
 
     /**

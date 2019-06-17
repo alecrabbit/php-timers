@@ -15,6 +15,7 @@ use AlecRabbit\Timers\Core\Traits\TimerFields;
 /**
  * Class TimerReport
  * @psalm-suppress MissingConstructor
+ * @psalm-suppress PropertyNotSetInConstructor
  */
 class TimerReport extends AbstractReport implements TimerReportInterface
 {

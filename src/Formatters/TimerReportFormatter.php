@@ -48,11 +48,11 @@ class TimerReportFormatter extends AbstractFormatter implements TimerReportForma
      */
     protected function refineElapsed(\DateInterval $elapsed): string
     {
-        return static::formatElapsed($elapsed);
+        return $this->formatElapsed($elapsed);
     }
 
     /** {@inheritdoc} */
-    public static function formatElapsed(\DateInterval $elapsed): string
+    public function formatElapsed(\DateInterval $elapsed): string
     {
         $c = CarbonInterval::instance($elapsed);
         if ($c->totalMilliseconds < self::MILLISECONDS_THRESHOLD) {
