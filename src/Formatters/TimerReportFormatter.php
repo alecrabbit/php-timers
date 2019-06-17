@@ -3,15 +3,14 @@
 namespace AlecRabbit\Formatters;
 
 use AlecRabbit\Accessories\Pretty;
-use AlecRabbit\Formatters\Core\Formattable;
-use AlecRabbit\Formatters\Core\ReportFormatter;
+use AlecRabbit\Formatters\Core\AbstractFormatter;
+use AlecRabbit\Reports\Core\Formattable;
 use AlecRabbit\Reports\TimerReport;
 use AlecRabbit\Timers\Contracts\TimerStrings;
-use function AlecRabbit\typeOf;
 use Carbon\CarbonInterval;
 use const AlecRabbit\Traits\Constants\DEFAULT_NAME;
 
-class TimerReportFormatter extends ReportFormatter implements TimerReportFormatterInterface, TimerStrings
+class TimerReportFormatter extends AbstractFormatter implements TimerReportFormatterInterface, TimerStrings
 {
     protected const MILLISECONDS_THRESHOLD = 10000;
 
@@ -24,9 +23,8 @@ class TimerReportFormatter extends ReportFormatter implements TimerReportFormatt
             }
             return $this->full($formattable);
         }
-        throw new \RuntimeException(
-            'Instance of [' . TimerReport::class . '] expected, [' . typeOf($formattable) . '] given.'
-        );
+        return
+            $this->errorMessage($formattable, TimerReport::class);
     }
 
     /**

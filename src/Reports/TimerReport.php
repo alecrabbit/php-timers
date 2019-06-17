@@ -8,6 +8,7 @@ use AlecRabbit\Reports\Contracts\ReportableInterface;
 use AlecRabbit\Reports\Contracts\ReportInterface;
 use AlecRabbit\Reports\Contracts\TimerReportInterface;
 use AlecRabbit\Reports\Core\AbstractReport;
+use AlecRabbit\Reports\Core\AbstractReportable;
 use AlecRabbit\Timers\Core\AbstractTimer;
 use AlecRabbit\Timers\Core\Traits\TimerFields;
 
@@ -19,31 +20,10 @@ class TimerReport extends AbstractReport implements TimerReportInterface
 {
     use TimerFields;
 
-    /** @var TimerReportFormatterInterface */
-    protected static $reportFormatter;
-
-//    /**
-//     * TimerReport constructor.
-//     * @throws \Exception
-//     */
-//    public function __construct()
-//    {
-//        $this->creationTime = new \DateTimeImmutable();
-//        $this->elapsed = (new \DateTimeImmutable())->diff($this->creationTime);
-//    }
-
-    public static function setFormatter(TimerReportFormatterInterface $formatter): void
-    {
-        static::$reportFormatter = $formatter;
-    }
-
-    /**
-     * @param ReportableInterface $reportable
-     * @return ReportInterface
-     * @throws \RuntimeException
+    /** {@inheritDoc}
      * @throws \Exception
      */
-    public function buildOn(ReportableInterface $reportable): ReportInterface
+    protected function extractDataFrom(AbstractReportable $reportable = null): void
     {
         if ($reportable instanceof AbstractTimer) {
             $this->name = $reportable->getName();
@@ -58,26 +38,6 @@ class TimerReport extends AbstractReport implements TimerReportInterface
             $this->avgValue = $reportable->getAverageValue();
             $this->currentValue = $reportable->getLastValue();
             $this->elapsed = $reportable->getElapsed();
-            return $this;
         }
-        throw new \InvalidArgumentException(
-            AbstractTimer::class . ' expected, ' . get_class($reportable) . ' given.'
-        );
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString(): string
-    {
-        return static::getFormatter()->format($this);
-    }
-
-    public static function getFormatter(): TimerReportFormatterInterface
-    {
-        if (!static::$reportFormatter instanceof TimerReportFormatterInterface) {
-            static::$reportFormatter = new TimerReportFormatter();
-        }
-        return static::$reportFormatter;
     }
 }

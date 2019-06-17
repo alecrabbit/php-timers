@@ -35,7 +35,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "AlecRabbit\\Tests\\Timers\\": "tests/"
+      "AlecRabbit\\Tests\\Timers\\": "tests",
+      "AlecRabbit\\Tests\\": "tests"
     }
   },
   "minimum-stability": "alpha"

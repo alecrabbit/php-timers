@@ -3,7 +3,7 @@
 namespace AlecRabbit\Timers\Core;
 
 use AlecRabbit\Reports\Contracts\ReportInterface;
-use AlecRabbit\Reports\Core\Reportable;
+use AlecRabbit\Reports\Core\AbstractReportable;
 use AlecRabbit\Reports\TimerReport;
 use AlecRabbit\Timers\Contracts\TimerInterface;
 use AlecRabbit\Timers\Core\Traits\TimerFields;
@@ -11,7 +11,7 @@ use AlecRabbit\Timers\Core\Traits\TimerFields;
 /**
  * Class AbstractTimer
  */
-abstract class AbstractTimer extends Reportable implements TimerInterface
+abstract class AbstractTimer extends AbstractReportable implements TimerInterface
 {
     use TimerFields;
 
@@ -23,11 +23,11 @@ abstract class AbstractTimer extends Reportable implements TimerInterface
      */
     public function __construct(?string $name = null, bool $start = true)
     {
+        parent::__construct();
         $this->checkEnvironment();
         $this->name = $this->defaultName($name);
         $this->creationTime = new \DateTimeImmutable();
         $this->computeElapsed();
-        $this->report = $this->createEmptyReport();
         if ($start) {
             $this->start();
         }
@@ -172,7 +172,7 @@ abstract class AbstractTimer extends Reportable implements TimerInterface
     protected function formattedElapsed(): string
     {
         return
-            TimerReport::getFormatter()::formatElapsed($this->elapsed);
+            $this->report()->getFormatter()->formatElapsed($this->elapsed);
     }
 
     /**
@@ -218,10 +218,5 @@ abstract class AbstractTimer extends Reportable implements TimerInterface
     {
         $this->currentValue = $stop - $start;
         $this->previous = $stop;
-    }
-
-    protected function createEmptyReport(): ReportInterface
-    {
-        return (new TimerReport())->buildOn($this);
     }
 }

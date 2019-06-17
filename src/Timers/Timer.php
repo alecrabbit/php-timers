@@ -2,6 +2,8 @@
 
 namespace AlecRabbit\Timers;
 
+use AlecRabbit\Formatters\TimerReportFormatter;
+use AlecRabbit\Reports\TimerReport;
 use AlecRabbit\Timers\Core\AbstractTimer;
 
 /**
@@ -10,6 +12,16 @@ use AlecRabbit\Timers\Core\AbstractTimer;
  */
 class Timer extends AbstractTimer
 {
+    public function __construct(?string $name = null, bool $start = true)
+    {
+        parent::__construct($name, $start);
+        $this->setBindings(
+            TimerReport::class,
+            TimerReportFormatter::class
+        );
+    }
+
+
     /**
      * @return float
      */
