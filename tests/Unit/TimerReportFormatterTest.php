@@ -5,7 +5,7 @@ namespace AlecRabbit\Tests\Timers;
 use AlecRabbit\Accessories\Pretty;
 use AlecRabbit\Formatters\TimerReportFormatter;
 use AlecRabbit\Reports\TimerReport;
-use AlecRabbit\Aux\WrongFormattable;
+use AlecRabbit\Auxiliary\WrongFormattable;
 use AlecRabbit\Timers\Contracts\TimerStrings;
 use AlecRabbit\Timers\Timer;
 use PHPUnit\Framework\TestCase;
@@ -34,7 +34,7 @@ class TimerReportFormatterTest extends TestCase
         $str = $formatter->format($wrongFormattable);
         $this->assertSame(
             '[AlecRabbit\Formatters\TimerReportFormatter]' .
-            ' ERROR: AlecRabbit\Reports\TimerReport expected, AlecRabbit\Aux\WrongFormattable given.',
+            ' ERROR: AlecRabbit\Reports\TimerReport expected, AlecRabbit\Auxiliary\WrongFormattable given.',
             $str
         );
     }
